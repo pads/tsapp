@@ -9,7 +9,7 @@ import Cookie
 from .http import http_write
 
 
-def authenticate(config, user, password, challenger):
+def authenticate(config, user, password, challenger=None):
     """
     Authenticate the user with password against target_server,
     return the value of the tiddlyweb_user cookie.
