@@ -9,7 +9,7 @@ import Cookie
 from .http import http_write
 
 
-def authenticate(config, user, password):
+def authenticate(config, user, password, challenger):
     """
     Authenticate the user with password against target_server,
     return the value of the tiddlyweb_user cookie.
@@ -24,7 +24,9 @@ def authenticate(config, user, password):
     if server_prefix:
         uri = target + '/' + server_prefix
 
-    if tiddlyweb_mode:
+    if challenger:
+        uri = uri + '/challenge/%s' % challenger
+    elif tiddlyweb_mode:
         uri = uri + '/challenge/cookie_form'
     else:
         uri = uri + '/challenge/tiddlywebplugins.tiddlyspace.cookie_form'
